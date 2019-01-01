@@ -13,7 +13,7 @@ action :create do
 
   cron_d cron_name do
     command cron_options[:command] ||
-      "backup perform --trigger #{new_resource.name} \
+      "#{cron_options[:command_path] || 'backup'} perform --trigger #{new_resource.name} \
       --config-file #{node['backup']['config_path']}/config.rb \
       --log-path=#{node['backup']['log_path']} #{node['backup']['addl_flags']} \
       #{cron_output_redirect}".squeeze(' ')
